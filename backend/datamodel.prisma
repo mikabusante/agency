@@ -1,17 +1,55 @@
-type User  {
-  id: ID! @id
-  name: String!
-  email: String!
+enum Permission {
+  ADMIN
+  USER
+  ITEMCREATE
+  ITEMUPDATE
+  ITEMDELETE
+  PERMISSIONUPDATE
 }
 
-type Item {
+type User  {
   id: ID! @id
-  title: String!
-  description: String!
+  name: String
+  email: String! @unique
+  password: String!
+  resetToken: String
+  resetTokenExpiry: String
+  permissions: Permission
   image: String
-  largeImage: String
-  price: Int!
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
+  handle: String @unique
+  pronouns: String
+  bio: String
+  links: [Link]
+  location: String
+  friends: [User]
+  products: [Product]
+  work: [Work]
+  guidelines: [Guideline]
+}
 
+
+
+type Link {
+  id: ID! @id
+  display: String!
+  target: String!
+}
+
+type Product {
+  id: ID! @id
+  image: String!
+  title: String!
+  price: Int!
+  description: String!
+  type: String
+}
+
+type Work {
+  id: ID! @id
+  image: String!
+}
+
+type Guideline {
+  id: ID! @id
+  text: String!
 }

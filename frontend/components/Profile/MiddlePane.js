@@ -1,43 +1,60 @@
 import React from 'react';
 import styled from 'styled-components';
+import uniqid from 'uniqid';
 
-const MiddlePane = () => (
-  <Wrapper>
-    <Box>
-      <Header>Commissions</Header>
-      <Item>
-        <Thumbnail src="/static/comm_1.png" alt="placeholder" />
+const MiddlePane = ({ middlePaneData }) => {
+  const commissions = middlePaneData.filter(prod => prod.type === 'commission');
+  const merch = middlePaneData.filter(prod => prod.type === 'merch');
+
+  return (
+    <Wrapper>
+      <Box>
         <div>
-          <ItemTitle>Portrait Icon — $40</ItemTitle>
-          <ItemDesc>Lorem ipsum</ItemDesc>
+          <Header>Commissions</Header>
+
+          {commissions.splice(0, 2).map(prod => (
+            <Item key={uniqid()}>
+              <Thumbnail src={prod.image} alt={prod.title} />
+              <div>
+                <ItemTitle>
+                  {prod.title} — ${prod.price}
+                </ItemTitle>
+                <ItemDesc>{prod.description}</ItemDesc>
+              </div>
+
+              <PurchaseButton type="submit">purchase</PurchaseButton>
+            </Item>
+          ))}
         </div>
+        <ViewMore>View All</ViewMore>
+      </Box>
 
-        <PurchaseButton type="submit">purchase</PurchaseButton>
-      </Item>
+      <Box>
+        <Header>Merchandise</Header>
+        {merch.splice(0, 2).map(prod => (
+          <Item key={uniqid()}>
+            <Thumbnail src={prod.image} alt={prod.title} />
+            <div>
+              <ItemTitle>
+                {prod.title} — ${prod.price}
+              </ItemTitle>
+              <ItemDesc>{prod.description}</ItemDesc>
+            </div>
 
-      <Item>
-        <Thumbnail src="/static/comm_1.png" alt="placeholder" />
-        <div>
-          <ItemTitle>Portrait Icon — $40</ItemTitle>
-          <ItemDesc>Lorem ipsum</ItemDesc>
-        </div>
-
-        <PurchaseButton type="submit">purchase</PurchaseButton>
-      </Item>
-    </Box>
-    <Box>
-      <Header>Merchandise</Header>
-    </Box>
-  </Wrapper>
-);
+            <PurchaseButton type="submit">purchase</PurchaseButton>
+          </Item>
+        ))}
+        <ViewMore>View All</ViewMore>
+      </Box>
+    </Wrapper>
+  );
+};
 
 export default MiddlePane;
 
 const Wrapper = styled.div`
-  max-height: 95%;
   display: grid;
-  grid-template-rows: 1fr 1fr;
-
+  grid-template-rows: max-content max-content;
   grid-gap: 3%;
 
   * {
@@ -46,27 +63,30 @@ const Wrapper = styled.div`
 `;
 
 const Box = styled.div`
-  box-shadow: ${props => props.theme.blue} 10px 8px;
-  border: 3px solid ${props => props.theme.blue};
-  padding: 8%;
+  box-shadow: ${props => props.theme.fg} 10px 8px;
+  border: 3px solid ${props => props.theme.fg};
+  padding: 5% 8% 2% 8%;
+  max-height: max-content;
 `;
 
 const Header = styled.h3`
   font-size: 24px;
+  margin-bottom: 10px;
 `;
 
 const Item = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: auto 6fr 1fr;
   align-items: center;
-  grid-gap: 5px;
+  grid-gap: 15px;
   margin-bottom: 13px;
   justify-content: space-between;
 `;
 
 const Thumbnail = styled.img`
-  width: 100%;
-  height: auto;
+  width: 85px;
+  height: 85px;
+  object-fit: cover;
 `;
 
 const ItemTitle = styled.h4`
@@ -81,8 +101,22 @@ const ItemDesc = styled.p`
 const PurchaseButton = styled.button`
   width: max-content;
   padding: 3px 8px 5px 8px;
-  background-color: ${props => props.theme.blue};
-  color: ${props => props.theme.pink};
-  border: 0;
+  background-color: ${props => props.theme.fg};
+  color: ${props => props.theme.bg};
+  border: 2px solid ${props => props.theme.fg};
   border-radius: 1px;
+  cursor: pointer;
+
+  :hover {
+    background-color: ${props => props.theme.bg};
+    color: ${props => props.theme.fg};
+  }
+`;
+
+const ViewMore = styled.a`
+  font-size: 18px;
+  text-decoration: underline;
+  cursor: pointer;
+  margin: 15px 0 30px 0;
+  display: inline-block;
 `;

@@ -1,7 +1,14 @@
-import App, { Container } from 'next/app';
-import { ApolloProvider } from 'react-apollo';
-import withData from '../lib/withData';
+import App from 'next/app';
+import { ApolloProvider } from '@apollo/react-hooks';
+import ApolloClient from 'apollo-boost';
+import fetch from 'node-fetch';
+// import withData from '../lib/withData';
 import Page from '../components/Page';
+
+const client = new ApolloClient({
+  fetch,
+  uri: 'http://localhost:4444',
+});
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -10,24 +17,22 @@ class MyApp extends App {
       pageProps = await Component.getInitialProps(ctx);
     }
 
-    // exposes te query to the user
+    // exposes the query to the user
     pageProps.query = ctx.query;
     return { pageProps };
   }
 
   render() {
-    const { Component, apollo, pageProps } = this.props;
+    const { Component, pageProps } = this.props;
 
     return (
-      <Container>
-        <ApolloProvider client={apollo}>
-          <Page>
-            <Component {...pageProps} />
-          </Page>
-        </ApolloProvider>
-      </Container>
+      <ApolloProvider client={client}>
+        <Page>
+          <Component {...pageProps} />
+        </Page>
+      </ApolloProvider>
     );
   }
 }
 
-export default withData(MyApp);
+export default MyApp;

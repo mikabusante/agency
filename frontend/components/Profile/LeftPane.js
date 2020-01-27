@@ -1,63 +1,64 @@
 import React from 'react';
 import styled from 'styled-components';
+import uniqid from 'uniqid';
 
-const LeftPane = () => (
-  <Wrapper>
-    <Me>
-      <ProfilePicture src="/static/profile.png" alt="test profile" />
-      <MeText>
-        <Name>Mika :)</Name>
-        <Handle>mikabusante</Handle>
-        <Pronouns>they/them</Pronouns>
-      </MeText>
-    </Me>
+const LeftPane = ({ leftPaneData }) => {
+  const { name, handle, pronouns, bio, location, links } = leftPaneData;
 
-    <Bio>
-      <Header>— BIO</Header>
-      <BioText>Hello! I’m Mika and I make websites by daylight and make illustrations by night.</BioText>
-    </Bio>
+  return (
+    <Wrapper>
+      <Me>
+        <ProfilePicture src="/static/profile.png" alt="test profile" />
+        <MeText>
+          <Name>{name}</Name>
+          <Handle>{handle}</Handle>
+          <Pronouns>{pronouns}</Pronouns>
+        </MeText>
+      </Me>
 
-    <Player>
-      <div className="wavy" data-text="loaderloader"></div>
-    </Player>
+      <Bio>
+        <Header>BIO</Header>
+        <BioText>{bio}</BioText>
+      </Bio>
 
-    <div>
-      <Header>— LINKS</Header>
-      <LinksList>
-        <li>
-          <Links href="/">Twitter</Links>
-        </li>
-        <li>
-          <Links href="/">Instagram</Links>
-        </li>
-        <li>
-          <Links href="/">Portfolio</Links>
-        </li>
-      </LinksList>
-    </div>
+      <Player>
+        <div className="wavy" data-text="loaderloader"></div>
+      </Player>
 
-    <div>
-      <Header>— Location</Header>
-      <p>The Internet</p>
-    </div>
-
-    <div>
-      <Header>— Friends</Header>
       <div>
-        <Friend src="/static/placeholder.jpg" />
-        <Friend src="/static/placeholder.jpg" />
-        <Friend src="/static/placeholder.jpg" />
-        <Friend src="/static/placeholder.jpg" />
+        <Header>LINKS</Header>
+        <LinksList>
+          {links.map(link => (
+            <li key={uniqid()}>
+              <Links href={link.target}>{link.display}</Links>
+            </li>
+          ))}
+        </LinksList>
       </div>
-    </div>
-  </Wrapper>
-);
+
+      <div>
+        <Header>Location</Header>
+        <p>{location}</p>
+      </div>
+
+      <div>
+        <Header>Friends</Header>
+        <div>
+          <Friend src="/static/placeholder.jpg" />
+          <Friend src="/static/placeholder.jpg" />
+          <Friend src="/static/placeholder.jpg" />
+          <Friend src="/static/placeholder.jpg" />
+        </div>
+      </div>
+    </Wrapper>
+  );
+};
 
 export default LeftPane;
 
 const Wrapper = styled.div`
-  box-shadow: ${props => props.theme.blue} 10px 8px;
-  border: 3px solid ${props => props.theme.blue};
+  box-shadow: ${props => props.theme.fg} 10px 8px;
+  border: 3px solid ${props => props.theme.fg};
   height: max-content;
   display: grid;
   grid-template-rows: auto auto auto auto auto;
@@ -75,7 +76,7 @@ const ProfilePicture = styled.img`
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 3px solid ${props => props.theme.blue};
+  border: 3px solid ${props => props.theme.fg};
   margin-left: -3%;
   margin-bottom: 10px;
 `;
@@ -102,8 +103,8 @@ const Handle = styled.span`
 `;
 
 const Pronouns = styled.div`
-  background-color: ${props => props.theme.blue};
-  color: ${props => props.theme.pink};
+  background-color: ${props => props.theme.fg};
+  color: ${props => props.theme.bg};
   text-align: center;
   width: max-content;
   padding: 3px 5px;
@@ -116,6 +117,7 @@ const Header = styled.h3`
   margin: 0;
   margin-bottom: 4px;
   font-size: 14px;
+  text-transform: uppercase;
 `;
 
 const Bio = styled.div`
@@ -130,7 +132,7 @@ const BioText = styled.p`
 `;
 
 const Player = styled.div`
-  background-color: ${props => props.theme.blue};
+  background-color: ${props => props.theme.fg};
   height: 80px;
   margin-left: -12%;
   margin-right: -6%;
@@ -150,7 +152,7 @@ const Links = styled.a`
   display: block;
 
   :visited {
-    color: ${props => props.theme.blue};
+    color: ${props => props.theme.fg};
   }
 `;
 
@@ -158,6 +160,6 @@ const Friend = styled.img`
   width: 35px;
   height: 35px;
   border-radius: 50%;
-  border: 2px solid ${props => props.theme.blue};
+  border: 2px solid ${props => props.theme.fg};
   margin-right: 5px;
 `;

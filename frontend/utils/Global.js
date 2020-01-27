@@ -9,10 +9,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    color: ${props => props.theme.blue};
+    color: ${props => props.theme.fg};
     font-family: 'Karla', sans-serif;
 
   }
+
+
 `;
 
 export default GlobalStyle;

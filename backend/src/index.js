@@ -1,31 +1,26 @@
 /* eslint-disable no-console */
 require('dotenv').config({ path: 'variables.env' });
-const passport = require('passport');
-const TwitterStrategy = require('passport-twitter');
+
 const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 const createServer = require('./createServer');
 const db = require('./db');
 
 const server = createServer();
-
 server.express.use(cookieParser());
-// TODO use express middleware to populate current user
 
-// passport.use(new TwitterStrategy({
-//   consumerKey: TWITTER_CONSUMER_KEY,
-//   consumerSecret: TWITTER_CONSUMER_SECRET,
-//   callbackURL: "http://www.example.com/auth/twitter/callback"
-// },
-// function(token, tokenSecret, profile, done) {
-//   User.findOrCreate(..., function(err, user) {
-//     if (err) { return done(err); }
-//     done(null, user);
-//   });
-// }
-// ));
+// decode the jwt
+server.express.use(async (req, res, next) => {
+  const cookieToken = req.cookies.token;
 
-server.express.get('/auth/twitter', (req, res, next) => {
-  res.send('hello there');
+  if (cookieToken) {
+    const { email } = jwt.verify(cookieToken, process.env.APP_SECRET);
+    console.log('logged in as:', email);
+
+    req.email = email;
+  }
+
+  next();
 });
 
 server.start(

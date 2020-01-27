@@ -17,4 +17,5 @@ type Query {
   # items: [Item]!
   users(where: UserWhereInput): [User]!
   user(where: UserWhereInput!): User
+  me: User
 }

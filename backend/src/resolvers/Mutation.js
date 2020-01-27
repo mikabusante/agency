@@ -34,7 +34,9 @@ const Mutations = {
       },
       info
     );
-    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+
+    const token = jwt.sign({ email: user.email }, process.env.APP_SECRET);
+    // console.log('token in query:', token);
 
     ctx.response.cookie('token', token, {
       httpOnly: true,

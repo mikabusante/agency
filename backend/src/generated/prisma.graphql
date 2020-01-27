@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/mika-16bb02/agency/dev
-# timestamp: Mon Jan 27 2020 11:40:13 GMT-0500 (Eastern Standard Time)
+# timestamp: Mon Jan 27 2020 15:44:39 GMT-0500 (Eastern Standard Time)
 
 type AggregateGuideline {
   count: Int!
@@ -1489,15 +1489,15 @@ type Subscription {
 
 type User implements Node {
   id: ID!
-  image: String
   name: String
-  handle: String
-  pronouns: String
-  email: String
-  password: String
+  email: String!
+  password: String!
   resetToken: String
   resetTokenExpiry: String
   permissions: Permission
+  image: String
+  handle: String
+  pronouns: String
   bio: String
   links(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Link!]
   location: String
@@ -1519,15 +1519,15 @@ type UserConnection {
 
 input UserCreateInput {
   id: ID
-  image: String
   name: String
-  handle: String
-  pronouns: String
-  email: String
-  password: String
+  email: String!
+  password: String!
   resetToken: String
   resetTokenExpiry: String
   permissions: Permission
+  image: String
+  handle: String
+  pronouns: String
   bio: String
   location: String
   links: LinkCreateManyInput
@@ -1554,14 +1554,8 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
-  image_ASC
-  image_DESC
   name_ASC
   name_DESC
-  handle_ASC
-  handle_DESC
-  pronouns_ASC
-  pronouns_DESC
   email_ASC
   email_DESC
   password_ASC
@@ -1572,6 +1566,12 @@ enum UserOrderByInput {
   resetTokenExpiry_DESC
   permissions_ASC
   permissions_DESC
+  image_ASC
+  image_DESC
+  handle_ASC
+  handle_DESC
+  pronouns_ASC
+  pronouns_DESC
   bio_ASC
   bio_DESC
   location_ASC
@@ -1580,15 +1580,15 @@ enum UserOrderByInput {
 
 type UserPreviousValues {
   id: ID!
-  image: String
   name: String
-  handle: String
-  pronouns: String
-  email: String
-  password: String
+  email: String!
+  password: String!
   resetToken: String
   resetTokenExpiry: String
   permissions: Permission
+  image: String
+  handle: String
+  pronouns: String
   bio: String
   location: String
 }
@@ -1642,46 +1642,6 @@ input UserScalarWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  image: String
-
-  """All values that are not equal to given value."""
-  image_not: String
-
-  """All values that are contained in given list."""
-  image_in: [String!]
-
-  """All values that are not contained in given list."""
-  image_not_in: [String!]
-
-  """All values less than the given value."""
-  image_lt: String
-
-  """All values less than or equal the given value."""
-  image_lte: String
-
-  """All values greater than the given value."""
-  image_gt: String
-
-  """All values greater than or equal the given value."""
-  image_gte: String
-
-  """All values containing the given string."""
-  image_contains: String
-
-  """All values not containing the given string."""
-  image_not_contains: String
-
-  """All values starting with the given string."""
-  image_starts_with: String
-
-  """All values not starting with the given string."""
-  image_not_starts_with: String
-
-  """All values ending with the given string."""
-  image_ends_with: String
-
-  """All values not ending with the given string."""
-  image_not_ends_with: String
   name: String
 
   """All values that are not equal to given value."""
@@ -1722,86 +1682,6 @@ input UserScalarWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  handle: String
-
-  """All values that are not equal to given value."""
-  handle_not: String
-
-  """All values that are contained in given list."""
-  handle_in: [String!]
-
-  """All values that are not contained in given list."""
-  handle_not_in: [String!]
-
-  """All values less than the given value."""
-  handle_lt: String
-
-  """All values less than or equal the given value."""
-  handle_lte: String
-
-  """All values greater than the given value."""
-  handle_gt: String
-
-  """All values greater than or equal the given value."""
-  handle_gte: String
-
-  """All values containing the given string."""
-  handle_contains: String
-
-  """All values not containing the given string."""
-  handle_not_contains: String
-
-  """All values starting with the given string."""
-  handle_starts_with: String
-
-  """All values not starting with the given string."""
-  handle_not_starts_with: String
-
-  """All values ending with the given string."""
-  handle_ends_with: String
-
-  """All values not ending with the given string."""
-  handle_not_ends_with: String
-  pronouns: String
-
-  """All values that are not equal to given value."""
-  pronouns_not: String
-
-  """All values that are contained in given list."""
-  pronouns_in: [String!]
-
-  """All values that are not contained in given list."""
-  pronouns_not_in: [String!]
-
-  """All values less than the given value."""
-  pronouns_lt: String
-
-  """All values less than or equal the given value."""
-  pronouns_lte: String
-
-  """All values greater than the given value."""
-  pronouns_gt: String
-
-  """All values greater than or equal the given value."""
-  pronouns_gte: String
-
-  """All values containing the given string."""
-  pronouns_contains: String
-
-  """All values not containing the given string."""
-  pronouns_not_contains: String
-
-  """All values starting with the given string."""
-  pronouns_starts_with: String
-
-  """All values not starting with the given string."""
-  pronouns_not_starts_with: String
-
-  """All values ending with the given string."""
-  pronouns_ends_with: String
-
-  """All values not ending with the given string."""
-  pronouns_not_ends_with: String
   email: String
 
   """All values that are not equal to given value."""
@@ -1972,6 +1852,126 @@ input UserScalarWhereInput {
 
   """All values that are not contained in given list."""
   permissions_not_in: [Permission!]
+  image: String
+
+  """All values that are not equal to given value."""
+  image_not: String
+
+  """All values that are contained in given list."""
+  image_in: [String!]
+
+  """All values that are not contained in given list."""
+  image_not_in: [String!]
+
+  """All values less than the given value."""
+  image_lt: String
+
+  """All values less than or equal the given value."""
+  image_lte: String
+
+  """All values greater than the given value."""
+  image_gt: String
+
+  """All values greater than or equal the given value."""
+  image_gte: String
+
+  """All values containing the given string."""
+  image_contains: String
+
+  """All values not containing the given string."""
+  image_not_contains: String
+
+  """All values starting with the given string."""
+  image_starts_with: String
+
+  """All values not starting with the given string."""
+  image_not_starts_with: String
+
+  """All values ending with the given string."""
+  image_ends_with: String
+
+  """All values not ending with the given string."""
+  image_not_ends_with: String
+  handle: String
+
+  """All values that are not equal to given value."""
+  handle_not: String
+
+  """All values that are contained in given list."""
+  handle_in: [String!]
+
+  """All values that are not contained in given list."""
+  handle_not_in: [String!]
+
+  """All values less than the given value."""
+  handle_lt: String
+
+  """All values less than or equal the given value."""
+  handle_lte: String
+
+  """All values greater than the given value."""
+  handle_gt: String
+
+  """All values greater than or equal the given value."""
+  handle_gte: String
+
+  """All values containing the given string."""
+  handle_contains: String
+
+  """All values not containing the given string."""
+  handle_not_contains: String
+
+  """All values starting with the given string."""
+  handle_starts_with: String
+
+  """All values not starting with the given string."""
+  handle_not_starts_with: String
+
+  """All values ending with the given string."""
+  handle_ends_with: String
+
+  """All values not ending with the given string."""
+  handle_not_ends_with: String
+  pronouns: String
+
+  """All values that are not equal to given value."""
+  pronouns_not: String
+
+  """All values that are contained in given list."""
+  pronouns_in: [String!]
+
+  """All values that are not contained in given list."""
+  pronouns_not_in: [String!]
+
+  """All values less than the given value."""
+  pronouns_lt: String
+
+  """All values less than or equal the given value."""
+  pronouns_lte: String
+
+  """All values greater than the given value."""
+  pronouns_gt: String
+
+  """All values greater than or equal the given value."""
+  pronouns_gte: String
+
+  """All values containing the given string."""
+  pronouns_contains: String
+
+  """All values not containing the given string."""
+  pronouns_not_contains: String
+
+  """All values starting with the given string."""
+  pronouns_starts_with: String
+
+  """All values not starting with the given string."""
+  pronouns_not_starts_with: String
+
+  """All values ending with the given string."""
+  pronouns_ends_with: String
+
+  """All values not ending with the given string."""
+  pronouns_not_ends_with: String
   bio: String
 
   """All values that are not equal to given value."""
@@ -2094,15 +2094,15 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateDataInput {
-  image: String
   name: String
-  handle: String
-  pronouns: String
   email: String
   password: String
   resetToken: String
   resetTokenExpiry: String
   permissions: Permission
+  image: String
+  handle: String
+  pronouns: String
   bio: String
   location: String
   links: LinkUpdateManyInput
@@ -2113,15 +2113,15 @@ input UserUpdateDataInput {
 }
 
 input UserUpdateInput {
-  image: String
   name: String
-  handle: String
-  pronouns: String
   email: String
   password: String
   resetToken: String
   resetTokenExpiry: String
   permissions: Permission
+  image: String
+  handle: String
+  pronouns: String
   bio: String
   location: String
   links: LinkUpdateManyInput
@@ -2132,15 +2132,15 @@ input UserUpdateInput {
 }
 
 input UserUpdateManyDataInput {
-  image: String
   name: String
-  handle: String
-  pronouns: String
   email: String
   password: String
   resetToken: String
   resetTokenExpiry: String
   permissions: Permission
+  image: String
+  handle: String
+  pronouns: String
   bio: String
   location: String
 }
@@ -2158,15 +2158,15 @@ input UserUpdateManyInput {
 }
 
 input UserUpdateManyMutationInput {
-  image: String
   name: String
-  handle: String
-  pronouns: String
   email: String
   password: String
   resetToken: String
   resetTokenExpiry: String
   permissions: Permission
+  image: String
+  handle: String
+  pronouns: String
   bio: String
   location: String
 }
@@ -2236,46 +2236,6 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  image: String
-
-  """All values that are not equal to given value."""
-  image_not: String
-
-  """All values that are contained in given list."""
-  image_in: [String!]
-
-  """All values that are not contained in given list."""
-  image_not_in: [String!]
-
-  """All values less than the given value."""
-  image_lt: String
-
-  """All values less than or equal the given value."""
-  image_lte: String
-
-  """All values greater than the given value."""
-  image_gt: String
-
-  """All values greater than or equal the given value."""
-  image_gte: String
-
-  """All values containing the given string."""
-  image_contains: String
-
-  """All values not containing the given string."""
-  image_not_contains: String
-
-  """All values starting with the given string."""
-  image_starts_with: String
-
-  """All values not starting with the given string."""
-  image_not_starts_with: String
-
-  """All values ending with the given string."""
-  image_ends_with: String
-
-  """All values not ending with the given string."""
-  image_not_ends_with: String
   name: String
 
   """All values that are not equal to given value."""
@@ -2316,86 +2276,6 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  handle: String
-
-  """All values that are not equal to given value."""
-  handle_not: String
-
-  """All values that are contained in given list."""
-  handle_in: [String!]
-
-  """All values that are not contained in given list."""
-  handle_not_in: [String!]
-
-  """All values less than the given value."""
-  handle_lt: String
-
-  """All values less than or equal the given value."""
-  handle_lte: String
-
-  """All values greater than the given value."""
-  handle_gt: String
-
-  """All values greater than or equal the given value."""
-  handle_gte: String
-
-  """All values containing the given string."""
-  handle_contains: String
-
-  """All values not containing the given string."""
-  handle_not_contains: String
-
-  """All values starting with the given string."""
-  handle_starts_with: String
-
-  """All values not starting with the given string."""
-  handle_not_starts_with: String
-
-  """All values ending with the given string."""
-  handle_ends_with: String
-
-  """All values not ending with the given string."""
-  handle_not_ends_with: String
-  pronouns: String
-
-  """All values that are not equal to given value."""
-  pronouns_not: String
-
-  """All values that are contained in given list."""
-  pronouns_in: [String!]
-
-  """All values that are not contained in given list."""
-  pronouns_not_in: [String!]
-
-  """All values less than the given value."""
-  pronouns_lt: String
-
-  """All values less than or equal the given value."""
-  pronouns_lte: String
-
-  """All values greater than the given value."""
-  pronouns_gt: String
-
-  """All values greater than or equal the given value."""
-  pronouns_gte: String
-
-  """All values containing the given string."""
-  pronouns_contains: String
-
-  """All values not containing the given string."""
-  pronouns_not_contains: String
-
-  """All values starting with the given string."""
-  pronouns_starts_with: String
-
-  """All values not starting with the given string."""
-  pronouns_not_starts_with: String
-
-  """All values ending with the given string."""
-  pronouns_ends_with: String
-
-  """All values not ending with the given string."""
-  pronouns_not_ends_with: String
   email: String
 
   """All values that are not equal to given value."""
@@ -2566,6 +2446,126 @@ input UserWhereInput {
 
   """All values that are not contained in given list."""
   permissions_not_in: [Permission!]
+  image: String
+
+  """All values that are not equal to given value."""
+  image_not: String
+
+  """All values that are contained in given list."""
+  image_in: [String!]
+
+  """All values that are not contained in given list."""
+  image_not_in: [String!]
+
+  """All values less than the given value."""
+  image_lt: String
+
+  """All values less than or equal the given value."""
+  image_lte: String
+
+  """All values greater than the given value."""
+  image_gt: String
+
+  """All values greater than or equal the given value."""
+  image_gte: String
+
+  """All values containing the given string."""
+  image_contains: String
+
+  """All values not containing the given string."""
+  image_not_contains: String
+
+  """All values starting with the given string."""
+  image_starts_with: String
+
+  """All values not starting with the given string."""
+  image_not_starts_with: String
+
+  """All values ending with the given string."""
+  image_ends_with: String
+
+  """All values not ending with the given string."""
+  image_not_ends_with: String
+  handle: String
+
+  """All values that are not equal to given value."""
+  handle_not: String
+
+  """All values that are contained in given list."""
+  handle_in: [String!]
+
+  """All values that are not contained in given list."""
+  handle_not_in: [String!]
+
+  """All values less than the given value."""
+  handle_lt: String
+
+  """All values less than or equal the given value."""
+  handle_lte: String
+
+  """All values greater than the given value."""
+  handle_gt: String
+
+  """All values greater than or equal the given value."""
+  handle_gte: String
+
+  """All values containing the given string."""
+  handle_contains: String
+
+  """All values not containing the given string."""
+  handle_not_contains: String
+
+  """All values starting with the given string."""
+  handle_starts_with: String
+
+  """All values not starting with the given string."""
+  handle_not_starts_with: String
+
+  """All values ending with the given string."""
+  handle_ends_with: String
+
+  """All values not ending with the given string."""
+  handle_not_ends_with: String
+  pronouns: String
+
+  """All values that are not equal to given value."""
+  pronouns_not: String
+
+  """All values that are contained in given list."""
+  pronouns_in: [String!]
+
+  """All values that are not contained in given list."""
+  pronouns_not_in: [String!]
+
+  """All values less than the given value."""
+  pronouns_lt: String
+
+  """All values less than or equal the given value."""
+  pronouns_lte: String
+
+  """All values greater than the given value."""
+  pronouns_gt: String
+
+  """All values greater than or equal the given value."""
+  pronouns_gte: String
+
+  """All values containing the given string."""
+  pronouns_contains: String
+
+  """All values not containing the given string."""
+  pronouns_not_contains: String
+
+  """All values starting with the given string."""
+  pronouns_starts_with: String
+
+  """All values not starting with the given string."""
+  pronouns_not_starts_with: String
+
+  """All values ending with the given string."""
+  pronouns_ends_with: String
+
+  """All values not ending with the given string."""
+  pronouns_not_ends_with: String
   bio: String
 
   """All values that are not equal to given value."""
@@ -2665,8 +2665,8 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
-  handle: String
   email: String
+  handle: String
 }
 
 type Work implements Node {

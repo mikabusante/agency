@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import SignIn from '../components/SignIn';
+import SignIn from '../components/Onboard/SignIn';
 
 const signin = () => (
   <div>

@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import Username from './Username';
 
 const Header = () => (
   <Wrapper>
     <Logo>Agency</Logo>
+
     <nav>
-      <Link href="/">
-        <NavLink>Profile</NavLink>
-      </Link>
+      <Username />
       <Link href="/">
         <NavLink>Dashboard</NavLink>
       </Link>
@@ -39,7 +39,7 @@ const Logo = styled.h1`
   font-size: 18px;
 `;
 
-const NavLink = styled.a`
+export const NavLink = styled.a`
   color: ${props => props.theme.black};
   cursor: pointer;
   margin-right: 20px;
